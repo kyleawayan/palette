@@ -1,0 +1,9 @@
+.parent {
+  flex-wrap: wrap;
+}
+
+.child {
+  flex: 0 1 300px;
+  font-size: 2rem;
+  text-align: center;
+}

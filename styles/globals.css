@@ -1,0 +1,23 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: ltc-bodoni-175, serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.pancake {
+  display: grid;
+  height: 100vh;
+  grid-template-rows: auto 1fr auto;
+}
+
+header {
+  padding: 2rem;
+}
+
+footer {
+  padding: 2rem;
+  text-align: center;
+}
