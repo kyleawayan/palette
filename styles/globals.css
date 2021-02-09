@@ -5,6 +5,7 @@ body {
   font-family: ltc-bodoni-175, serif;
   font-weight: 400;
   font-style: italic;
+  background-color: #f5f5f5;
 }
 
 .pancake {
@@ -20,4 +21,35 @@ header {
 footer {
   padding: 2rem;
   text-align: center;
+}
+
+/* https://codepen.io/sdthornton/pen/wBZdXq */
+
+button {
+  font-family: ltc-bodoni-175, serif;
+  font-weight: 400;
+  font-style: italic;
+  border: none;
+  outline: none;
+  background-color: rgb(187, 61, 65);
+  color: white;
+  padding: 10px;
+  font-size: 15px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  transition: 0.1s;
+}
+
+button:hover {
+  background-color: rgb(230, 69, 74);
+  transition: 0.1s;
+  cursor: pointer;
+}
+
+button:active {
+  transform: scale(0.98);
+  transition: 0.1s;
+}
+
+a {
+  color: black;
 }

@@ -13,7 +13,11 @@ export default function Index() {
           <Editor />
         </Center>
       </main>
-      <footer>by kylan</footer>
+      <footer>
+        <a href="https://github.com/kyleawayan/palette" target="_blank">
+          github
+        </a>
+      </footer>
     </div>
   );
 }

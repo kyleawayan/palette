@@ -2,13 +2,11 @@
   display: grid;
   place-items: center;
   height: 100%;
-  resize: both;
   overflow: auto;
 }
 
 .childCenter {
   padding: 0.5rem;
   border-radius: 10px;
-  font-size: 2rem;
   text-align: center;
 }

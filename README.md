@@ -1,1 +1,1 @@
-# palette
+# IU Palette Generator

@@ -8,6 +8,8 @@
 
 .palette {
   position: relative;
+  max-height: 50vh;
+  max-width: 50vh;
 }
 
 .frame {
@@ -27,12 +29,12 @@
 
 .caption {
   position: absolute;
-  bottom: 21%;
-  right: 44%;
+  bottom: 19.6%;
   z-index: 2;
   font-size: 1.5vh;
   text-align: center;
-  transform: rotate(0.5deg);
+  width: 100%;
+  transform: rotate(0.05deg);
 }
 
 .captionPink {
@@ -41,4 +43,16 @@
 
 .captionBlue {
   color: rgb(32, 184, 205);
+}
+
+.upload {
+  position: absolute;
+  top: 14.3%;
+  left: 21.8%;
+  z-index: 2;
+  font-size: 1.2vh;
+  text-align: center;
+  width: 55.5%;
+  height: 57%;
+  transform: rotate(-0.02deg);
 }
