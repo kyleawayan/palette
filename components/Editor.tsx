@@ -3,6 +3,7 @@ import AlbumArt from "./AlbumArt";
 import * as domtoimage from "dom-to-image";
 import { saveAs } from "file-saver";
 import { useRef } from "react";
+import { isSafari } from "react-device-detect";
 
 export default function Editor() {
   const palette = useRef(null);
@@ -41,6 +42,12 @@ export default function Editor() {
       </div>
       <div className={styles.child} style={{ marginTop: "25px" }}>
         <button onClick={saveImage}>download</button>
+        {isSafari && (
+          <div className={styles.warning}>
+            With Safari, you may need to download twice before the image is
+            rendered correctly.
+          </div>
+        )}
       </div>
     </div>
   );
