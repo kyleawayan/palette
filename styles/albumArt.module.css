@@ -38,12 +38,12 @@
 
 .caption {
   position: absolute;
-  bottom: 19.6%;
+  bottom: 19.55%;
   z-index: 2;
   font-size: 1.5vh;
   text-align: center;
   width: 100%;
-  transform: rotate(0.05deg);
+  transform: rotate(0.02deg);
 }
 
 .captionPink {

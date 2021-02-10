@@ -14,7 +14,6 @@ export default function AlbumArt() {
       reader.onabort = () => console.log("file reading was aborted");
       reader.onerror = () => console.log("file reading has failed");
       reader.onload = () => {
-        // Do whatever you want with the file contents
         const binaryStr = reader.result;
         setImageBase64(binaryStr);
       };

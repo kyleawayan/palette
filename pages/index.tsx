@@ -6,6 +6,10 @@ export default function Index() {
     <div className="pancake">
       <head>
         <link rel="stylesheet" href="https://use.typekit.net/ewb2tqh.css" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+        />
       </head>
       <header>IU Palette Generator</header>
       <main>

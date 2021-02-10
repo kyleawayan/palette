@@ -8,10 +8,23 @@ export default function Editor() {
   const palette = useRef(null);
 
   const saveImage = () => {
-    domtoimage.toBlob(palette.current).then(function (blob) {
-      console.log("save?");
-      saveAs(blob, "my-node.png");
-    });
+    // https://github.com/tsayen/dom-to-image/issues/69#issuecomment-486146688
+    const scale = 640 / palette.current.offsetWidth;
+    domtoimage
+      .toBlob(palette.current, {
+        height: palette.current.offsetHeight * scale,
+        width: palette.current.offsetWidth * scale,
+        style: {
+          transform: "scale(" + scale + ")",
+          transformOrigin: "top left",
+          width: palette.current.offsetWidth + "px",
+          height: palette.current.offsetHeight + "px",
+        },
+      })
+      .then(function (blob) {
+        console.log("save?");
+        saveAs(blob, "my-node.png");
+      });
   };
 
   return (
