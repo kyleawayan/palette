@@ -4,6 +4,7 @@ import { useDropzone } from "react-dropzone";
 import Center from "./Center";
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
+import ScrollContainer from "react-indiana-drag-scroll";
 import "../utils/i18n";
 
 export default function AlbumArt() {
@@ -37,13 +38,17 @@ export default function AlbumArt() {
     <div className={styles.palette}>
       <img src="frame.png" className={styles.frame}></img>
       {imageBase64 && (
-        <div className={styles.pictureContainer}>
+        <ScrollContainer
+          className={styles.pictureContainer}
+          hideScrollbars={false}
+        >
           <img src={imageBase64} className={styles.picture} />
-        </div>
+        </ScrollContainer>
       )}
-      <div {...getRootProps()} className={styles.upload}>
-        <input {...getInputProps()} />
-        {!imageBase64 && (
+      {!imageBase64 && (
+        <div {...getRootProps()} className={styles.upload}>
+          <input {...getInputProps()} />
+
           <Center>
             {isDragActive ? (
               <p>{t("Drop Files (Hover)")}</p>
@@ -51,8 +56,8 @@ export default function AlbumArt() {
               <p>{t("Drop Files Here")}</p>
             )}
           </Center>
-        )}
-      </div>
+        </div>
+      )}
       <div className={styles.captionContainer}>
         <div className={styles.caption}>
           <span className={styles.captionPink} contentEditable="true">
