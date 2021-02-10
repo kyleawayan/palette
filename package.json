@@ -10,12 +10,14 @@
   "dependencies": {
     "dom-to-image": "^2.6.0",
     "file-saver": "^2.0.5",
+    "i18next": "^19.8.7",
     "next": "10.0.6",
     "next-seo": "^4.19.0",
     "react": "17.0.1",
     "react-device-detect": "^1.15.0",
     "react-dom": "17.0.1",
-    "react-dropzone": "^11.3.1"
+    "react-dropzone": "^11.3.1",
+    "react-i18next": "^11.8.6"
   },
   "devDependencies": {
     "@types/node": "^14.14.25",

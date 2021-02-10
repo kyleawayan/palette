@@ -2,11 +2,19 @@ import styles from "../styles/editor.module.css";
 import AlbumArt from "./AlbumArt";
 import * as domtoimage from "dom-to-image";
 import { saveAs } from "file-saver";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { isSafari } from "react-device-detect";
+import { useRouter } from "next/router";
+import { useTranslation } from "react-i18next";
+import "../pages/i18n";
 
 export default function Editor() {
   const palette = useRef(null);
+  const router = useRouter();
+  const { t, i18n } = useTranslation();
+  useEffect(() => {
+    i18n.changeLanguage(router.locale);
+  }, []);
 
   const saveImage = () => {
     // https://github.com/tsayen/dom-to-image/issues/69#issuecomment-486146688
@@ -42,12 +50,9 @@ export default function Editor() {
         <AlbumArt />
       </div>
       <div className={styles.child} style={{ marginTop: "25px" }}>
-        <button onClick={saveImage}>download</button>
+        <button onClick={saveImage}>{t("Download")}</button>
         {isSafari && (
-          <div className={styles.warning}>
-            With Safari, you may need to download twice before the image is
-            rendered correctly.
-          </div>
+          <div className={styles.warning}>{t("Safari Warning")}</div>
         )}
       </div>
     </div>

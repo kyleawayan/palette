@@ -1,10 +1,18 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import styles from "../styles/albumArt.module.css";
 import { useDropzone } from "react-dropzone";
 import Center from "./Center";
+import { useRouter } from "next/router";
+import { useTranslation } from "react-i18next";
+import "../pages/i18n";
 
 export default function AlbumArt() {
   const [imageBase64, setImageBase64] = useState(null);
+  const router = useRouter();
+  const { t, i18n } = useTranslation();
+  useEffect(() => {
+    i18n.changeLanguage(router.locale);
+  }, []);
 
   const onDrop = useCallback((acceptedFiles) => {
     acceptedFiles.forEach((file) => {
@@ -38,9 +46,9 @@ export default function AlbumArt() {
         {!imageBase64 && (
           <Center>
             {isDragActive ? (
-              <p>Drop the files here ...</p>
+              <p>{t("Drop Files (Hover)")}</p>
             ) : (
-              <p>Drag 'n' drop some files here, or click to select files</p>
+              <p>{t("Drop Files Here")}</p>
             )}
           </Center>
         )}
@@ -48,10 +56,10 @@ export default function AlbumArt() {
       <div className={styles.captionContainer}>
         <div className={styles.caption}>
           <span className={styles.captionPink} contentEditable="true">
-            Click me to edit.
+            {t("Click Me")}
           </span>{" "}
           <span className={styles.captionBlue} contentEditable="true">
-            Also click me.
+            {t("Also Click Me")}
           </span>
         </div>
       </div>

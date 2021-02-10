@@ -1,8 +1,18 @@
 import { NextSeo } from "next-seo";
 import Center from "../components/Center";
 import Editor from "../components/Editor";
+import "./i18n";
+import { useTranslation } from "react-i18next";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 export default function Index() {
+  const router = useRouter();
+  const { t, i18n } = useTranslation();
+  useEffect(() => {
+    i18n.changeLanguage(router.locale);
+  }, []);
+
   return (
     <div className="pancake">
       <head>
@@ -28,7 +38,7 @@ export default function Index() {
           site_name: "IU Palette Generator",
         }}
       />
-      <header>IU Palette Generator</header>
+      <header>{t("Header")}</header>
       <main>
         <Center>
           <Editor />
