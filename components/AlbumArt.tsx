@@ -7,8 +7,19 @@ import { useTranslation } from "react-i18next";
 import ScrollContainer from "react-indiana-drag-scroll";
 import "../utils/i18n";
 
+async function getResolution(binaryStr): Promise<number[]> {
+  return new Promise<number[]>((resolve, reject) => {
+    const img = new Image();
+    img.src = binaryStr;
+    img.onload = function () {
+      resolve([img.width, img.height]);
+    };
+  });
+}
+
 export default function AlbumArt() {
   const [imageBase64, setImageBase64] = useState(null);
+  const [imageStyle, setImageStyle] = useState({});
   const router = useRouter();
   const { t, i18n } = useTranslation();
   useEffect(() => {
@@ -25,6 +36,25 @@ export default function AlbumArt() {
       reader.onload = () => {
         const binaryStr = reader.result;
         setImageBase64(binaryStr);
+        getResolution(binaryStr).then((res) => {
+          if (res[0] > res[1]) {
+            // width > height
+            setImageStyle({
+              height: "100%",
+            });
+          } else if (res[0] < res[1]) {
+            // width < height
+            setImageStyle({
+              width: "100%",
+            });
+          } else {
+            // square aspect ratio
+            setImageStyle({
+              height: "100%",
+              width: "100%",
+            });
+          }
+        });
       };
     });
   }, []);
@@ -42,7 +72,11 @@ export default function AlbumArt() {
           className={styles.pictureContainer}
           hideScrollbars={false}
         >
-          <img src={imageBase64} className={styles.picture} />
+          <img
+            src={imageBase64}
+            className={styles.picture}
+            style={imageStyle}
+          />
         </ScrollContainer>
       )}
       {!imageBase64 && (

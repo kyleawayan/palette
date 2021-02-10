@@ -50,7 +50,7 @@ export default function Editor() {
         <AlbumArt />
       </div>
       <div className={styles.child} style={{ marginTop: "25px" }}>
-        <button onClick={saveImage}>{t("Download")}</button>
+        <button>{t("Download")}</button>
         {isSafari && (
           <div className={styles.warning}>{t("Safari Warning")}</div>
         )}
