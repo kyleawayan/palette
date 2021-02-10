@@ -8,8 +8,8 @@
 
 .palette {
   position: relative;
-  max-height: 50vh;
-  max-width: 50vh;
+  height: 50vh;
+  width: 50vh;
 }
 
 .frame {

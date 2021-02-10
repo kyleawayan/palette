@@ -23,8 +23,7 @@ export default function Editor() {
         },
       })
       .then(function (blob) {
-        console.log("save?");
-        saveAs(blob, "my-node.png");
+        saveAs(blob, "palette.png");
       });
   };
 
@@ -36,6 +35,8 @@ export default function Editor() {
         style={{
           boxShadow:
             "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)",
+          height: "50vh",
+          width: "50vh",
         }}
       >
         <AlbumArt />

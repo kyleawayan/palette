@@ -19,7 +19,11 @@ export default function AlbumArt() {
       };
     });
   }, []);
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    maxFiles: 1,
+    accept: "image/jpeg, image/png",
+  });
 
   return (
     <div className={styles.palette}>
