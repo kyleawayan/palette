@@ -31,7 +31,7 @@ button {
   font-style: italic;
   border: none;
   outline: none;
-  background-color: rgb(187, 61, 65);
+  background-color: rgb(179, 86, 94);
   color: white;
   padding: 10px;
   font-size: 15px;
@@ -40,7 +40,7 @@ button {
 }
 
 button:hover {
-  background-color: rgb(230, 69, 74);
+  background-color: rgb(179, 86, 94);
   transition: 0.1s;
   cursor: pointer;
 }

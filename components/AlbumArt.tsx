@@ -25,7 +25,11 @@ export default function AlbumArt() {
   return (
     <div className={styles.palette}>
       <img src="frame.png" className={styles.frame}></img>
-      {imageBase64 && <img src={imageBase64} className={styles.picture} />}
+      {imageBase64 && (
+        <div className={styles.pictureContainer}>
+          <img src={imageBase64} className={styles.picture} />
+        </div>
+      )}
       <div {...getRootProps()} className={styles.upload}>
         <input {...getInputProps()} />
         {!imageBase64 && (
