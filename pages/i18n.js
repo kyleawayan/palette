@@ -1,7 +1,7 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
-const enUS = require('./lang/en-US.json')
-const koKR = require('./lang/ko-KR.json')
+const enUS = require('../lang/en-US.json')
+const koKR = require('../lang/ko-KR.json')
 
 // the translations
 // (tip move them in a JSON file and import them)
