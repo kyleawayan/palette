@@ -1,7 +1,7 @@
 import { NextSeo } from "next-seo";
 import Center from "../components/Center";
 import Editor from "../components/Editor";
-import "./i18n";
+import "../utils/i18n";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
 import { useRouter } from "next/router";

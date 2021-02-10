@@ -6,7 +6,7 @@ import { useEffect, useRef } from "react";
 import { isSafari } from "react-device-detect";
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
-import "../pages/i18n";
+import "../utils/i18n";
 
 export default function Editor() {
   const palette = useRef(null);

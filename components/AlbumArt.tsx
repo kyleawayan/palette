@@ -4,7 +4,7 @@ import { useDropzone } from "react-dropzone";
 import Center from "./Center";
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
-import "../pages/i18n";
+import "../utils/i18n";
 
 export default function AlbumArt() {
   const [imageBase64, setImageBase64] = useState(null);
