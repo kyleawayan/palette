@@ -1,23 +1,17 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
-const enUS = require("../lang/en-US.json");
-const koKR = require("../lang/ko-KR.json");
+const enUS = require('../lang/en-US.json')
+const koKR = require('../lang/ko-KR.json')
 
 // the translations
 // (tip move them in a JSON file and import them)
 const resources = {
   "en-US": {
-    translation: enUS,
-  },
-  ko: {
-    translation: koKR,
-  },
-  "ko-kr": {
-    translation: koKR,
+    translation: enUS
   },
   "ko-KR": {
-    translation: koKR,
-  },
+    translation: koKR
+  }
 };
 
 i18n
@@ -29,8 +23,8 @@ i18n
     keySeparator: false, // we do not use keys in form messages.welcome
 
     interpolation: {
-      escapeValue: false, // react already safes from xss
+      escapeValue: false // react already safes from xss
     },
   });
 
-export default i18n;
+  export default i18n;
