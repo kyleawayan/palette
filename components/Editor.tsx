@@ -2,7 +2,7 @@ import styles from "../styles/editor.module.css";
 import AlbumArt from "./AlbumArt";
 import * as domtoimage from "dom-to-image";
 import { saveAs } from "file-saver";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { isSafari } from "react-device-detect";
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
@@ -12,6 +12,8 @@ export default function Editor() {
   const palette = useRef(null);
   const router = useRouter();
   const { t, i18n } = useTranslation();
+  const [resetKey, setResetKey] = useState(0); // by passing a key to AlbumArt, we can reset it by just changing the key
+
   useEffect(() => {
     i18n.changeLanguage(router.locale);
   }, []);
@@ -47,10 +49,11 @@ export default function Editor() {
           width: "50vh",
         }}
       >
-        <AlbumArt />
+        <AlbumArt key={resetKey} />
       </div>
-      <div className={styles.child} style={{ marginTop: "25px" }}>
-        <button>{t("Download")}</button>
+      <div className={styles.child} style={{ marginTop: "35px" }}>
+        <button onClick={() => setResetKey(resetKey + 1)}>{t("Reset")}</button>
+        <button onClick={saveImage}>{t("Download")}</button>
         {isSafari && (
           <div className={styles.warning}>{t("Safari Warning")}</div>
         )}
