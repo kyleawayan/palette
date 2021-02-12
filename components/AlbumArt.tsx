@@ -41,6 +41,7 @@ export default function AlbumArt() {
         const binaryStr = reader.result;
         setImageBase64(binaryStr);
         getResolution(binaryStr).then((res) => {
+          // note these "preset" zoom factors are for like regular sized photos, like 2:3 and stuff, but longer aspect ratios like 9:16 will be zoomed out
           if (res.width < res.height) {
             // potrait photos, found in my tests that a zoom factor of about 1.5 fills the square
             setZoom(1.5);
@@ -61,7 +62,12 @@ export default function AlbumArt() {
     accept: "image/jpeg, image/png",
   });
 
-  console.log(zoom);
+  const flashGrid = () => {
+    setShowGrid(true);
+    setTimeout(() => {
+      setShowGrid(false);
+    }, 500);
+  };
 
   return (
     <div className={styles.palette}>
@@ -85,6 +91,7 @@ export default function AlbumArt() {
                 border: 0,
               },
             }}
+            onMediaLoaded={flashGrid}
             onInteractionStart={() => setShowGrid(true)}
             onInteractionEnd={() => setShowGrid(false)}
           />
