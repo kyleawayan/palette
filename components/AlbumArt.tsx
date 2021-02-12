@@ -1,25 +1,29 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import styles from "../styles/albumArt.module.css";
 import { useDropzone } from "react-dropzone";
 import Center from "./Center";
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
-import ScrollContainer from "react-indiana-drag-scroll";
+import Cropper from "react-easy-crop";
 import "../utils/i18n";
 
-async function getResolution(binaryStr): Promise<number[]> {
-  return new Promise<number[]>((resolve, reject) => {
+async function getResolution(binaryStr): Promise<Record<string, number>> {
+  return new Promise<Record<string, number>>((resolve, reject) => {
     const img = new Image();
     img.src = binaryStr;
     img.onload = function () {
-      resolve([img.width, img.height]);
+      resolve({ width: img.width, height: img.height });
     };
   });
 }
 
 export default function AlbumArt() {
   const [imageBase64, setImageBase64] = useState(null);
-  const [imageStyle, setImageStyle] = useState({});
+  const [crop, setCrop] = useState({ x: 0, y: 0 });
+  const [zoom, setZoom] = useState(1);
+  const [showGrid, setShowGrid] = useState(false);
+  const photoRef = useRef(null);
+
   const router = useRouter();
   const { t, i18n } = useTranslation();
   useEffect(() => {
@@ -37,22 +41,10 @@ export default function AlbumArt() {
         const binaryStr = reader.result;
         setImageBase64(binaryStr);
         getResolution(binaryStr).then((res) => {
-          if (res[0] > res[1]) {
-            // width > height
-            setImageStyle({
-              height: "100%",
-            });
-          } else if (res[0] < res[1]) {
-            // width < height
-            setImageStyle({
-              width: "100%",
-            });
+          if (res.width !== res.height) {
+            setZoom(res.width / photoRef.current.clientHeight / 2);
           } else {
-            // square aspect ratio
-            setImageStyle({
-              height: "100%",
-              width: "100%",
-            });
+            setZoom(1.05); // set a little zoomed in for square photos so blank space doesn't show
           }
         });
       };
@@ -68,16 +60,27 @@ export default function AlbumArt() {
     <div className={styles.palette}>
       <img src="frame.png" className={styles.frame}></img>
       {imageBase64 && (
-        <ScrollContainer
-          className={styles.pictureContainer}
-          hideScrollbars={false}
-        >
-          <img
-            src={imageBase64}
-            className={styles.picture}
-            style={imageStyle}
+        <div className={styles.pictureContainer} ref={photoRef}>
+          <Cropper
+            image={imageBase64}
+            crop={crop}
+            zoom={zoom}
+            aspect={1}
+            onCropChange={setCrop}
+            onZoomChange={setZoom}
+            showGrid={showGrid}
+            style={{
+              cropAreaStyle: {
+                minWidth: "100%",
+                minHeight: "100%",
+                color: "transparent",
+                border: 0,
+              },
+            }}
+            onInteractionStart={() => setShowGrid(true)}
+            onInteractionEnd={() => setShowGrid(false)}
           />
-        </ScrollContainer>
+        </div>
       )}
       {!imageBase64 && (
         <div {...getRootProps()} className={styles.upload}>

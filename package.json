@@ -17,8 +17,8 @@
     "react-device-detect": "^1.15.0",
     "react-dom": "17.0.1",
     "react-dropzone": "^11.3.1",
-    "react-i18next": "^11.8.6",
-    "react-indiana-drag-scroll": "^1.8.0"
+    "react-easy-crop": "^3.3.1",
+    "react-i18next": "^11.8.6"
   },
   "devDependencies": {
     "@types/node": "^14.14.25",
