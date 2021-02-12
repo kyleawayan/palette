@@ -42,7 +42,7 @@ export default function AlbumArt() {
         setImageBase64(binaryStr);
         getResolution(binaryStr).then((res) => {
           if (res.width !== res.height) {
-            setZoom(res.width / photoRef.current.clientHeight / 2);
+            setZoom(res.width / photoRef.current.clientHeight / 2.2);
           } else {
             setZoom(1.05); // set a little zoomed in for square photos so blank space doesn't show
           }
@@ -69,6 +69,7 @@ export default function AlbumArt() {
             onCropChange={setCrop}
             onZoomChange={setZoom}
             showGrid={showGrid}
+            maxZoom={5}
             style={{
               cropAreaStyle: {
                 minWidth: "100%",
