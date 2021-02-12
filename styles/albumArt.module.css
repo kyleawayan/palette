@@ -68,4 +68,5 @@
   font-size: 1.2vh;
   text-align: center;
   transform: rotate(-0.02deg);
+  cursor: pointer;
 }
