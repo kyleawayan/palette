@@ -7,16 +7,6 @@ import { useTranslation } from "react-i18next";
 import Cropper from "react-easy-crop";
 import "../utils/i18n";
 
-async function getResolution(binaryStr): Promise<Record<string, number>> {
-  return new Promise<Record<string, number>>((resolve, reject) => {
-    const img = new Image();
-    img.src = binaryStr;
-    img.onload = function () {
-      resolve({ width: img.width, height: img.height });
-    };
-  });
-}
-
 export default function AlbumArt() {
   const [imageBase64, setImageBase64] = useState(null);
   const [crop, setCrop] = useState({ x: 0, y: 0 });
@@ -40,19 +30,6 @@ export default function AlbumArt() {
       reader.onload = () => {
         const binaryStr = reader.result;
         setImageBase64(binaryStr);
-        getResolution(binaryStr).then((res) => {
-          // note these "preset" zoom factors are for like regular sized photos, like 2:3 and stuff, but longer aspect ratios like 9:16 will be zoomed out
-          if (res.width < res.height) {
-            // potrait photos, found in my tests that a zoom factor of about 1.5 fills the square
-            setZoom(1.5);
-          } else if (res.width > res.height) {
-            // landscape photos, found in my tests that a zoom factor of about 2.0 fills the square
-            setZoom(2.0);
-          } else {
-            // set a little zoomed in for square photos so blank space doesn't show
-            setZoom(1.05);
-          }
-        });
       };
     });
   }, []);
@@ -62,7 +39,23 @@ export default function AlbumArt() {
     accept: "image/jpeg, image/png",
   });
 
-  const flashGrid = () => {
+  const onMediaLoad = (data) => {
+    setTimeout(() => {
+      if (data.width < data.height) {
+        // potrait photo
+        const pictureInsideFrameWidth = photoRef.current.clientWidth;
+        const scale = pictureInsideFrameWidth / data.width + 0.1; // give 0.1 margin of error so user doesn't drag image too far with blank space
+        setZoom(scale);
+      } else if (data.width > data.height) {
+        // landscape photo
+        const pictureInsideFrameHeight = photoRef.current.clientHeight;
+        const scale = pictureInsideFrameHeight / data.height + 0.1;
+        setZoom(scale);
+      } else {
+        // set a little zoomed in for square photos so blank space doesn't show
+        setZoom(1.05);
+      }
+    }, 1);
     setShowGrid(true);
     setTimeout(() => {
       setShowGrid(false);
@@ -91,7 +84,7 @@ export default function AlbumArt() {
                 border: 0,
               },
             }}
-            onMediaLoaded={flashGrid}
+            onMediaLoaded={onMediaLoad}
             onInteractionStart={() => setShowGrid(true)}
             onInteractionEnd={() => setShowGrid(false)}
           />
