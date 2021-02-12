@@ -41,10 +41,15 @@ export default function AlbumArt() {
         const binaryStr = reader.result;
         setImageBase64(binaryStr);
         getResolution(binaryStr).then((res) => {
-          if (res.width !== res.height) {
-            setZoom(res.width / photoRef.current.clientHeight / 2.2);
+          if (res.width < res.height) {
+            // potrait photos, found in my tests that a zoom factor of about 1.5 fills the square
+            setZoom(1.5);
+          } else if (res.width > res.height) {
+            // landscape photos, found in my tests that a zoom factor of about 2.0 fills the square
+            setZoom(2.0);
           } else {
-            setZoom(1.05); // set a little zoomed in for square photos so blank space doesn't show
+            // set a little zoomed in for square photos so blank space doesn't show
+            setZoom(1.05);
           }
         });
       };
@@ -55,6 +60,8 @@ export default function AlbumArt() {
     maxFiles: 1,
     accept: "image/jpeg, image/png",
   });
+
+  console.log(zoom);
 
   return (
     <div className={styles.palette}>
