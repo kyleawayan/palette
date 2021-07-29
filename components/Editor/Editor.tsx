@@ -1,12 +1,12 @@
-import styles from "../styles/editor.module.css";
-import AlbumArt from "./AlbumArt";
+import styles from "./Editor.module.css";
+import AlbumArt from "../AlbumArt/AlbumArt";
 import * as domtoimage from "dom-to-image";
 import { saveAs } from "file-saver";
 import { useEffect, useRef, useState } from "react";
 import { isSafari } from "react-device-detect";
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
-import "../utils/i18n";
+import "../../utils/i18n";
 
 export default function Editor() {
   const palette = useRef(null);
