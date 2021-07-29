@@ -1,11 +1,11 @@
 import { useState, useCallback, useEffect, useRef } from "react";
-import styles from "../styles/albumArt.module.css";
+import styles from "./AlbumArt.module.css";
 import { useDropzone } from "react-dropzone";
-import Center from "./Center";
+import Center from "../Center/Center";
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
 import Cropper from "react-easy-crop";
-import "../utils/i18n";
+import "../../utils/i18n";
 
 export default function AlbumArt() {
   const [imageBase64, setImageBase64] = useState(null);

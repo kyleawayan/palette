@@ -1,4 +1,4 @@
-import styles from "../styles/center.module.css";
+import styles from "./Center.module.css";
 
 export default function Center({ children }) {
   return (
